@@ -1,0 +1,643 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>CRM 四種長相</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600&display=swap">
+<style>
+:root{
+  --paper:#F7F4EF;--raised:#FFFFFF;--sunk:#EFEAE2;--ink:#28231E;--muted:#746C62;--heading:#1C445C;
+  --gold:#B78A4F;--goldt:#8A6536;--line:#E3DCD1;--focus:#1C445C;
+  --bar:#1C445C;--onbar:#F7F4EF;--barsoft:#2B566F;
+  --red:#9E3A22;--redbg:#F6E3DC;--amber:#7A5410;--amberbg:#F4E8CF;--green:#2F6B45;--greenbg:#E1EEE3;--blue:#1C445C;--bluebg:#E2EBF0;
+  --scrim:rgba(40,35,30,.45);--device:#28231E;--onp:#FFFFFF;
+  --sans:"Noto Sans TC","Microsoft JhengHei","微軟正黑體","PingFang TC",sans-serif;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0B2F45;--raised:#123A52;--sunk:#0E3550;--ink:#F7F4EF;--muted:#B9C4CC;--heading:#F7F4EF;
+  --gold:#C9A15F;--goldt:#D4B07A;--line:#2A4E66;--focus:#D4B07A;
+  --bar:#06202F;--onbar:#F7F4EF;--barsoft:#173F57;
+  --red:#F2A792;--redbg:#4A2C28;--amber:#EBC77F;--amberbg:#3E3A26;--green:#A3D6B2;--greenbg:#1D4436;--blue:#BFD6E4;--bluebg:#1B4A66;
+  --scrim:rgba(0,0,0,.55);--device:#000;--onp:#0B2F45;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0B2F45;--raised:#123A52;--sunk:#0E3550;--ink:#F7F4EF;--muted:#B9C4CC;--heading:#F7F4EF;
+  --gold:#C9A15F;--goldt:#D4B07A;--line:#2A4E66;--focus:#D4B07A;
+  --bar:#06202F;--onbar:#F7F4EF;--barsoft:#173F57;
+  --red:#F2A792;--redbg:#4A2C28;--amber:#EBC77F;--amberbg:#3E3A26;--green:#A3D6B2;--greenbg:#1D4436;--blue:#BFD6E4;--bluebg:#1B4A66;
+  --scrim:rgba(0,0,0,.55);--device:#000;--onp:#0B2F45;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65}
+.page{max-width:1320px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:22px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+h1,h2,h3{color:var(--heading);text-wrap:balance;margin:0}
+.rule{height:2px;background:var(--gold)}
+.intro{display:grid;gap:10px}
+.brand{font-size:12px;letter-spacing:.2em;color:var(--goldt)}
+.intro h1{font-family:var(--serif);font-size:30px;letter-spacing:.04em}
+.intro p{margin:0;max-width:74ch;color:var(--muted)}
+.intro b{color:var(--ink)}
+.pick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.pick button{text-align:left;background:var(--raised);border:1px solid var(--line);border-radius:2px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.pick button[aria-pressed="true"]{border:2px solid var(--heading);padding:13px 15px;background:var(--bluebg)}
+.pick .k{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--goldt)}
+.pick .t{font-size:18px;font-weight:700;color:var(--heading)}
+.pick .s{font-size:13px;color:var(--muted)}
+.bar2{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;background:var(--raised);align-items:center}
+.seg .lb{font-size:13px;color:var(--muted);padding:0 4px 0 12px}
+.seg button{border:0;background:none;padding:8px 14px;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--heading);color:var(--onp)}
+.hint{font-size:13px;color:var(--muted)}
+.stage{overflow-x:auto;padding-block:4px}
+.frame{position:relative;background:var(--paper);border:1px solid var(--line);margin:0 auto;overflow:hidden}
+.frame.desk{min-width:1160px;height:740px}
+.frame.phone{width:390px;max-width:100%;height:780px;border:10px solid var(--device);border-radius:30px}
+.app{height:100%;display:grid;grid-template-rows:52px minmax(0,1fr)}
+.frame.phone .app{grid-template-rows:48px minmax(0,1fr) 60px}
+.top{background:var(--bar);color:var(--onbar);display:flex;align-items:center;gap:16px;padding:0 18px}
+.top .logo{font-family:var(--serif);letter-spacing:.12em;font-size:17px;white-space:nowrap}
+.top .q{flex:1;max-width:460px;background:var(--barsoft);border-radius:6px;padding:7px 12px;font-size:13px;opacity:.85}
+.top .me{margin-left:auto;font-size:13px;opacity:.9;white-space:nowrap}
+.frame.phone .top .q{display:none}
+.body{display:grid;grid-template-columns:224px minmax(0,1fr);min-height:0}
+.frame.phone .body{grid-template-columns:minmax(0,1fr)}
+/* ===== 新左邊：十個大模組，兩層 ===== */
+.side{border-right:1px solid var(--line);background:var(--raised);padding:12px 8px 20px;display:flex;flex-direction:column;gap:1px;overflow:auto}
+.frame.phone .side{display:none}
+.side .today{border:0;background:none;text-align:left;padding:9px 12px;border-radius:2px;font-size:15px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.side .today[aria-current="page"]{background:var(--bluebg);color:var(--heading);box-shadow:inset 3px 0 0 var(--heading)}
+.side .grp{font-size:11px;letter-spacing:.14em;color:var(--muted);padding:14px 12px 4px}
+.mod{display:flex;align-items:center;gap:6px;width:100%;border:0;background:none;padding:7px 10px;font-size:14.5px;text-align:left;border-radius:2px}
+.mod:hover,.side .today:hover,.subs button:hover{background:var(--sunk)}
+.mod .no{font-size:11px;color:var(--goldt);width:20px;font-weight:700;flex:none}
+.mod .car{margin-left:auto;color:var(--muted);font-size:10px;padding-left:6px}
+.mod[aria-expanded="true"]{font-weight:700;color:var(--heading)}
+.mod.off{color:var(--muted)}
+.mod .tag{font-size:11px;color:var(--muted);font-weight:400}
+.subs{display:grid;margin:0 0 6px 20px;padding-left:8px;border-left:1px solid var(--line)}
+.subs button{border:0;background:none;text-align:left;padding:5px 10px;font-size:14px;border-radius:2px;display:flex;justify-content:space-between}
+.subs button[aria-current="page"]{background:var(--bluebg);color:var(--heading);font-weight:700}
+.n{font-size:12px;background:var(--red);color:var(--onp);border-radius:10px;padding:0 7px;font-weight:700;line-height:1.6}
+.main{overflow:auto;padding:22px 26px;min-width:0}
+.frame.phone .main{padding:14px}
+.tabbar{display:none}
+.frame.phone .tabbar{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);background:var(--raised)}
+.tabbar button{border:0;background:none;font-size:12px;display:grid;place-items:center;color:var(--muted);padding-top:6px}
+.tabbar button .i{font-size:18px;line-height:1}
+.tabbar button[aria-current="page"]{color:var(--heading);font-weight:700}
+.tabbar .plus .i{width:38px;height:38px;border-radius:50%;background:var(--heading);color:var(--onp);display:grid;place-items:center;font-size:22px;margin-top:-6px}
+.sheet{position:absolute;left:0;right:0;top:48px;bottom:60px;background:var(--paper);z-index:6;padding:16px;overflow:auto;display:grid;gap:12px;align-content:start}
+.mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mods button{background:var(--raised);border:1px solid var(--line);padding:14px 6px;display:grid;gap:2px;place-items:center;text-align:center;font-size:14px}
+.mods .no{font-size:11px;color:var(--goldt);font-weight:700}
+.mods .off{color:var(--muted)}
+/* common */
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.ph .d{font-size:13px;color:var(--goldt);letter-spacing:.06em}
+.ph h2{font-size:24px}
+.frame.phone .ph h2{font-size:20px}
+.btn{border:1px solid var(--line);background:var(--raised);border-radius:2px;padding:7px 14px;font-size:14px;white-space:nowrap}
+.btn:hover{border-color:var(--heading)}
+.btn.p{background:var(--heading);border-color:var(--heading);color:var(--onp);font-weight:700}
+.btn.s{padding:4px 10px;font-size:13px}
+.panel{background:var(--raised);border:1px solid var(--line);padding:16px;min-width:0}
+.panel>h3{font-size:15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel>h3 small{font-weight:400;color:var(--muted);font-size:12.5px}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:2px;white-space:nowrap}
+.b-call{background:var(--bluebg);color:var(--blue)}
+.b-quote,.b-inq,.b-cold3{background:var(--amberbg);color:var(--amber)}
+.b-cold6{background:var(--redbg);color:var(--red)}
+.b-ok{background:var(--greenbg);color:var(--green)}
+.b-grade{background:var(--gold);color:#28231E}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.av{width:40px;height:40px;border-radius:50%;background:var(--bluebg);color:var(--heading);display:grid;place-items:center;font-weight:700;flex:none}
+.av.lg{width:64px;height:64px;font-size:26px}
+.next{background:var(--amberbg);border:1px solid var(--line);padding:12px 14px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.next b{color:var(--amber)}
+.kv{display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 10px;font-size:14px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0}
+.tl .it{display:grid;grid-template-columns:52px 64px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.tl .it:first-child{border-top:0}
+.tl .it .d{color:var(--muted)}
+.tl .it.sys{color:var(--muted)}
+.tl .it .k{font-size:12px;font-weight:700;color:var(--goldt)}
+.frame.phone .tl .it{grid-template-columns:44px minmax(0,1fr)}
+.frame.phone .tl .it .k,.frame.phone .tl .it .x{grid-column:2}
+.mini-tabs{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap}
+.mini-tabs button{border:1px solid var(--line);background:none;border-radius:2px;padding:2px 10px;font-size:13px}
+.mini-tabs button[aria-pressed="true"]{background:var(--sunk);border-color:var(--muted);font-weight:700}
+.li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.li:first-of-type{border-top:0}
+details summary{cursor:pointer;color:var(--muted);font-size:14px}
+.empty{padding:20px;text-align:center;color:var(--muted)}
+/* A */
+.chev{display:flex;margin-bottom:18px}
+.chev button{flex:1;border:0;background:var(--raised);padding:10px 8px 10px 24px;text-align:left;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%);margin-left:-8px;display:grid;outline-offset:-4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.chev button:first-child{margin-left:0;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);padding-left:14px}
+.chev button[aria-pressed="true"]{background:var(--heading);color:var(--onp)}
+.chev button[aria-pressed="true"] .c{color:var(--onp)}
+.chev .nm{font-weight:700;font-size:14px}
+.chev .c{font-size:12px;color:var(--muted)}
+.chev .r{color:var(--red);font-weight:700}
+.chev button[aria-pressed="true"] .r{color:inherit}
+.frame.phone .chev{overflow-x:auto}
+.frame.phone .chev button{flex:0 0 116px}
+.a-cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 230px;gap:16px;align-items:start}
+.frame.phone .a-cols{grid-template-columns:minmax(0,1fr)}
+.frame.phone .a-prev,.frame.phone .a-week{display:none}
+.trow{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;border:0;border-top:1px solid var(--line);background:none;text-align:left;padding:11px 6px}
+.trow:first-of-type{border-top:0}
+.trow:hover{background:var(--sunk)}
+.trow[aria-selected="true"]{background:var(--bluebg)}
+.trow .who{font-weight:700}
+.trow .why{font-size:13px;color:var(--muted)}
+.a-card{display:grid;grid-template-columns:260px minmax(0,1fr) 250px;gap:16px;align-items:start}
+.frame.phone .a-card{grid-template-columns:minmax(0,1fr)}
+.hl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);background:var(--raised);margin-bottom:16px}
+.hl>div{padding:10px 14px;border-left:1px solid var(--line)}
+.hl>div:first-child{border-left:0}
+.hl .l{font-size:12px;color:var(--muted)}
+.hl .v{font-weight:700}
+.frame.phone .hl{grid-template-columns:repeat(2,minmax(0,1fr))}
+.frame.phone .hl>div{border-left:0;border-top:1px solid var(--line)}
+/* B */
+.map{display:grid;grid-template-columns:repeat(11,auto);justify-content:start;margin-bottom:20px}
+.map .node{width:128px;border:1px solid var(--line);background:var(--raised);padding:12px 12px 10px;text-align:left;display:grid;gap:2px;position:relative}
+.map .node:hover{border-color:var(--heading)}
+.map .node[aria-pressed="true"]{border:2px solid var(--heading);padding:11px 11px 9px;background:var(--bluebg)}
+.map .node .step{font-size:11px;letter-spacing:.12em;color:var(--goldt);font-weight:700}
+.map .node .nm{font-size:18px;font-weight:700;color:var(--heading)}
+.map .node .c{font-size:13px;color:var(--muted)}
+.map .node .r{position:absolute;top:-10px;right:-8px;background:var(--red);color:var(--onp);font-size:12px;font-weight:700;border-radius:12px;padding:1px 8px}
+.map .arr{display:grid;place-items:center;width:22px;color:var(--gold);font-size:20px}
+.frame.phone .map{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.frame.phone .map .arr{display:none}
+.frame.phone .map .node{width:auto}
+.b-legend{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+.b-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.frame.phone .b-grid{grid-template-columns:minmax(0,1fr)}
+.tcard{background:var(--raised);border:1px solid var(--line);padding:14px;display:grid;gap:8px}
+.tcard .hd{display:flex;gap:10px;align-items:center}
+.tcard .who{font-weight:700;font-size:16px;border:0;background:none;padding:0;text-align:left;color:var(--heading);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}
+.tcard .acts{display:flex;gap:8px;flex-wrap:wrap}
+.b-card{max-width:780px;margin:0 auto;display:grid;gap:14px}
+.b-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.b-stats>div{background:var(--raised);border:1px solid var(--line);padding:10px 12px}
+.b-stats .l{font-size:12px;color:var(--muted)}
+.b-stats .v{font-weight:700;font-size:16px}
+.frame.phone .b-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* C */
+.path{display:flex;flex-wrap:wrap;gap:4px 0;font-size:13.5px;margin-bottom:14px;align-items:center}
+.path button{border:0;background:none;padding:2px 6px;border-radius:2px;color:var(--muted)}
+.path button b{color:var(--ink)}
+.path button[aria-pressed="true"]{background:var(--sunk);color:var(--ink)}
+.path .sp{color:var(--gold)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chips button{border:1px solid var(--line);background:var(--raised);border-radius:16px;padding:4px 14px;font-size:13.5px}
+.chips button[aria-pressed="true"]{background:var(--heading);border-color:var(--heading);color:var(--onp)}
+table.ct{width:100%;border-collapse:collapse;background:var(--raised);border:1px solid var(--line);font-size:14px}
+.ct th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:500;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--sunk)}
+.ct td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.ct tr.row{cursor:pointer}
+.ct tr.row:hover td{background:var(--sunk)}
+.ct tr.row[aria-selected="true"] td{background:var(--bluebg)}
+.frame.phone table.ct thead{display:none}
+.frame.phone table.ct tr.row{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:10px 12px;border-bottom:1px solid var(--line)}
+.frame.phone table.ct td{border:0;padding:0}
+.frame.phone table.ct td.hide-p{display:none}
+.drawer{position:absolute;top:52px;right:0;bottom:0;width:420px;background:var(--raised);border-left:1px solid var(--line);overflow:auto;padding:18px;display:grid;gap:14px;align-content:start;z-index:5}
+.frame.phone .drawer{top:48px;left:0;width:auto;bottom:60px;border-left:0}
+.drawer .x{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;background:var(--raised);padding-bottom:6px}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:8px 14px;font-size:14px;border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button[aria-pressed="true"]{border-color:var(--heading);color:var(--heading);font-weight:700}
+.jpath{display:flex;margin-bottom:14px}
+.jpath span{flex:1;text-align:center;font-size:13px;padding:7px 4px;background:var(--sunk);color:var(--muted);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%,10px 50%);margin-left:-6px}
+.jpath span:first-child{margin-left:0}
+.jpath span.on{background:var(--heading);color:var(--onp);font-weight:700}
+.jpath span.done{background:var(--bluebg);color:var(--heading)}
+.frame.phone .jpath span{font-size:11px}
+/* ===== D 甲骨文 ===== */
+.app.d{grid-template-rows:52px auto minmax(0,1fr)}
+.frame.phone .app.d{grid-template-rows:48px auto minmax(0,1fr)}
+.top .new{background:var(--gold);color:#28231E;border:0;border-radius:2px;padding:6px 12px;font-size:13px;font-weight:700;white-space:nowrap}
+.app.d .top .q{margin:0 auto}
+.app.d .top .me{margin-left:0}
+.d-tabs{display:flex;background:var(--raised);border-bottom:1px solid var(--line);padding:0 10px;overflow-x:auto}
+.d-tabs button{border:0;background:none;padding:10px 14px 8px;font-size:14px;white-space:nowrap;border-bottom:3px solid transparent}
+.d-tabs button:hover{background:var(--sunk)}
+.d-tabs button[aria-current="page"]{border-color:var(--gold);font-weight:700;color:var(--heading)}
+.d-tabs button .car{font-size:10px;color:var(--muted);margin-left:4px}
+.mega{position:absolute;left:0;right:0;top:95px;background:var(--raised);border-bottom:2px solid var(--gold);padding:16px 24px;z-index:7;display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.frame.phone .mega{top:91px;padding:14px}
+.mega h4{margin:0 0 6px;font-size:13px;color:var(--goldt);letter-spacing:.08em}
+.mega .col{display:grid;gap:2px;min-width:150px}
+.mega .col button{border:0;background:none;text-align:left;padding:5px 8px;font-size:14px;border-radius:2px}
+.mega .col button:hover{background:var(--sunk)}
+.d-band{background:var(--bar);color:var(--onbar);padding:18px 26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin:-22px -26px 18px}
+.frame.phone .d-band{margin:-14px -14px 14px;padding:16px 14px}
+.d-band h2{color:var(--onbar);font-size:22px}
+.d-band .sub{font-size:13px;opacity:.8}
+.qa{display:flex;gap:8px;flex-wrap:wrap}
+.qa button{background:var(--barsoft);color:var(--onbar);border:1px solid rgba(247,244,239,.25);border-radius:2px;padding:7px 12px;font-size:13.5px}
+.portlets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.portlets .span2{grid-column:span 2}
+.frame.phone .portlets{grid-template-columns:minmax(0,1fr)}
+.frame.phone .portlets .span2{grid-column:auto}
+.plet{background:var(--raised);border:1px solid var(--line);min-width:0}
+.plet>h3{font-size:14px;padding:9px 14px;border-bottom:1px solid var(--line);background:var(--sunk);display:flex;justify-content:space-between;align-items:center}
+.plet>h3 small{font-weight:400;color:var(--muted);font-size:12px}
+.plet .bd{padding:8px 14px 12px}
+.rem button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;background:none;padding:8px 4px;border-top:1px solid var(--line);text-align:left;font-size:14px}
+.rem button:first-child{border-top:0}
+.rem button[aria-pressed="true"]{background:var(--bluebg);font-weight:700}
+.rem .num{font-weight:700;color:var(--red);font-size:16px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kpis>div{background:var(--sunk);padding:8px 10px}
+.kpis .v{font-size:22px;font-weight:700;color:var(--heading)}
+.kpis .l{font-size:12px;color:var(--muted)}
+.links{display:grid;gap:0}
+.links button{border:0;background:none;text-align:left;padding:6px 0;color:var(--heading);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;font-size:14px}
+.mflow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:13px}
+.mflow span.s{background:var(--sunk);padding:3px 8px}
+.mflow span.s b{color:var(--red)}
+.mflow .a{color:var(--gold)}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:10px}
+.d-head{background:var(--raised);border:1px solid var(--line);border-top:3px solid var(--gold);padding:16px;display:grid;gap:14px;margin-bottom:14px}
+.d-head .row1{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.d-fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 18px;font-size:14px}
+.d-fields .l{font-size:12px;color:var(--muted)}
+.d-fields .v{font-weight:500}
+.frame.phone .d-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* modal & toast */
+.scrim{position:absolute;inset:0;background:var(--scrim);display:grid;place-items:center;z-index:10;padding:16px}
+.modal{background:var(--raised);border:1px solid var(--line);width:440px;max-width:100%;padding:18px;display:grid;gap:12px}
+.modal h3{font-size:17px}
+.modal label{font-size:13px;color:var(--muted);display:grid;gap:4px}
+.modal input{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%}
+.ways{display:flex;gap:6px;flex-wrap:wrap}
+.ways button{border:1px solid var(--line);background:var(--paper);border-radius:2px;padding:6px 12px;font-size:14px}
+.ways button[aria-pressed="true"]{background:var(--heading);color:var(--onp);border-color:var(--heading)}
+.toast{position:absolute;left:50%;bottom:76px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:8px 16px;font-size:14px;z-index:20;white-space:nowrap}
+/* compare */
+.cmp{overflow-x:auto}
+.cmp table{border-collapse:collapse;width:100%;min-width:820px;background:var(--raised);border:1px solid var(--line);font-size:14px}
+.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.cmp th{background:var(--sunk);font-weight:700;color:var(--heading)}
+.cmp td:first-child{color:var(--muted);white-space:nowrap}
+.navbox{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.navbox .panel p{margin:6px 0 0;font-size:14px}
+@media (max-width:760px){.navbox{grid-template-columns:minmax(0,1fr)}}
+.rec{background:var(--raised);padding:16px;display:grid;gap:6px;border:1px solid var(--line);border-top:2px solid var(--gold)}
+.rec b{color:var(--heading)}
+.reply{background:var(--raised);border:1px solid var(--line);padding:18px;display:grid;gap:12px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opts button{border:1px solid var(--line);background:var(--paper);padding:10px 16px;font-size:15px;border-radius:2px;min-height:44px}
+.opts button[aria-pressed="true"]{background:var(--heading);color:var(--onp);border-color:var(--heading);font-weight:700}
+.reply textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:10px;width:100%;min-height:80px}
+.out{white-space:pre-wrap;background:var(--sunk);padding:12px;font-size:14px;border:1px solid var(--line)}
+@media (max-width:900px){.pick{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.pick{grid-template-columns:minmax(0,1fr)}.intro h1{font-size:24px}}
+</style>
+
+<div class="page">
+  <header class="intro">
+    <div class="brand">CHENG LE ART · 誠樂 ERP · 樣張第 2 版</div>
+    <h1>CRM 畫面：四種長相，加上新的選單</h1>
+    <div class="rule"></div>
+    <p><b>這是樣張，不是 ERP。</b>人名、公司都是假資料，按了不會存進 ERP。</p>
+    <p>這版改了兩件事：<b>①左邊選單改成兩層</b>：第一層是你 10/25 定的 10 個大模組，點一個才展開裡面的細項；<b>上面「看成」可以切老闆／會計</b>，看的人不同，選單就不一樣（借甲骨文「照職位給畫面」的做法）。<b>②多一種 D 甲骨文長相</b>：大模組排在上面一排，首頁是一塊塊小方塊。</p>
+  </header>
+
+  <div class="pick" id="pick"></div>
+
+  <div class="bar2">
+    <div class="seg" id="segScreen"></div>
+    <div class="seg" id="segDev"></div>
+    <div class="seg" id="segRole"></div>
+  </div>
+  <div class="hint" id="hint"></div>
+
+  <div class="stage"><div id="frame" class="frame"></div></div>
+
+  <section style="display:grid;gap:12px">
+    <h2 style="font-size:20px">選單：國外怎麼做、我們怎麼做</h2>
+    <div class="navbox">
+      <div class="panel"><h3>Odoo（中小企業最多人用的那套）</h3>
+        <p>首頁是一格一格的大圖示（客戶關係、銷售、專案、會計…）。點進一格，上面才出現那一格的細項。很多公司另外加裝外掛，把細項搬到左邊，就是 A、B、C 現在的樣子。</p></div>
+      <div class="panel"><h3>甲骨文（NetSuite）</h3>
+        <p>照職位給一個「中心」：業務看到業務的、會計看到會計的。大方向排在最上面一排，點了往下展開細項。首頁是一塊塊小方塊（提醒、今天要做、數字、捷徑），每個人可以自己挑。這就是 D。</p></div>
+    </div>
+    <p class="hint">兩家都是「先選大方向，再選細項」，所以左邊不再是一長排瑣事。手機上按下面的「更多」，大模組會變成九宮格。</p>
+  </section>
+
+  <section style="display:grid;gap:12px">
+    <h2 style="font-size:20px">四種比一比</h2>
+    <div class="cmp"><table>
+      <thead><tr><th></th><th>A 三欄工作台</th><th>B 流程圖首頁</th><th>C 清單＋側邊抽屜</th><th>D 甲骨文</th></tr></thead>
+      <tbody>
+        <tr><td>參考誰</td><td>HubSpot、Salesforce</td><td>鼎新那種流程圖</td><td>Odoo、Linear</td><td>甲骨文 NetSuite</td></tr>
+        <tr><td>選單在哪</td><td>左邊兩層</td><td>左邊兩層</td><td>左邊兩層</td><td>上面一排，點了往下展開</td></tr>
+        <tr><td>一登入看到</td><td>細流程條＋今天要做的＋點到的人</td><td>大流程圖＋今天要做的卡片</td><td>今天要做的一張表</td><td>一塊塊小方塊：提醒、今天要做、數字、捷徑</td></tr>
+        <tr><td>好處</td><td>不用換頁就看得到人的資料</td><td>最好懂；手機跟電腦一樣</td><td>件數多也不亂</td><td>老闆一眼看全公司；畫面最寬（沒有左邊欄）</td></tr>
+        <tr><td>缺點</td><td>手機跟電腦長得不太一樣</td><td>一個畫面放的件數少</td><td>像表格，新手不知從哪開始</td><td>方塊多，業務每天用會覺得雜；上面一排模組多了會擠</td></tr>
+      </tbody>
+    </table></div>
+    <div class="rec">
+      <div><b>我的建議：A 的頁面＋左邊兩層選單。</b>國外主流 CRM 一打開都是「今天要做的事」。左邊兩層選單可以放下 10 個大模組，以後模組長大也排得下。</div>
+      <div class="muted small">D 甲骨文那種小方塊首頁很適合當「老闆的表」（老闆登入看到 D、業務會計看到 A），也可以這樣分。</div>
+    </div>
+  </section>
+
+  <section class="reply">
+    <h2 style="font-size:20px">你的選擇</h2>
+    <div class="opts" id="replyOpts"></div>
+    <label class="small muted" style="display:grid;gap:6px">要改的地方（例如「老闆看 D、其他人看 A」「選單字再大」）
+      <textarea id="replyNote" placeholder="可以不填"></textarea></label>
+    <div><button class="btn p" id="mk">產生回覆</button></div>
+    <div id="outWrap" hidden style="display:grid;gap:8px">
+      <div class="out" id="out"></div>
+      <div><button class="btn" id="cp">一鍵複製</button></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const VERS=[
+  {k:'A',t:'三欄工作台',s:'參考 HubSpot、Salesforce：資料攤在同一個畫面'},
+  {k:'B',t:'流程圖首頁',s:'參考鼎新：先看整個流程，點一站就跳過去'},
+  {k:'C',t:'清單＋側邊抽屜',s:'參考 Odoo：一行一件，點了從右邊滑出來'},
+  {k:'D',t:'甲骨文',s:'參考 NetSuite：模組在上面一排，首頁一塊塊小方塊'}
+];
+const MODS=[
+ {k:'crm',no:'1',n:'客戶關係',items:[['card','設計師／客戶'],['x','洽談'],['x','往來紀錄'],['x','老闆的表','boss']]},
+ {k:'sales',no:'2',n:'銷售',items:[['x','報價單'],['x','成交'],['x','同業叫料']]},
+ {k:'proj',no:'3',n:'專案',items:[['x','案子'],['x','排日期'],['x','派工'],['x','售後維修']]},
+ {k:'buy',no:'4',n:'採購與庫存',items:[['x','採購單'],['x','到貨／退貨'],['x','車工單'],['x','小庫存']]},
+ {k:'fin',no:'5',n:'財務',items:[['x','請款單'],['x','收款'],['x','佣金'],['x','付廠商'],['x','師傅工資'],['x','關帳']]},
+ {k:'bi',no:'6',n:'經營分析',items:[['x','案子損益'],['x','業績'],['x','成交率'],['x','設計師貢獻']]},
+ {k:'sign',no:'7',n:'簽核與文件',items:[['x','等我核准'],['x','附件照片']]},
+ {k:'hr',no:'8',n:'人力資源',tag:'暫用 104',items:[]},
+ {k:'base',no:'9',n:'基本資料',ground:1,items:[['x','產品／價錢'],['x','廠商'],['x','師傅'],['x','員工']]},
+ {k:'sys',no:'10',n:'系統設定',ground:1,items:[['x','帳號'],['x','誰能看什麼'],['x','操作紀錄'],['x','備份']]}
+];
+const ROLE={boss:{n:'老闆',me:'士誠（老闆）',mods:null},acc:{n:'會計（兼業務）',me:'會計（兼業務）',mods:['crm','sales','proj','fin','sign','base']}};
+const ST=[{k:'designer',n:'設計師',c:'86 位'},{k:'inq',n:'洽談',c:'12 筆進行中'},{k:'quote',n:'報價',c:'9 張等回覆'},{k:'deal',n:'成交',c:'本月 5 案'},{k:'proj',n:'案子',c:'17 件進行中'},{k:'pay',n:'收款',c:'4 件待請款'}];
+const TT={call:{n:'該聯絡',st:'designer',b:'b-call',m:'crm'},quote:{n:'報價沒回',st:'quote',b:'b-quote',m:'sales'},inq:{n:'洽談沒動',st:'inq',b:'b-inq',m:'crm'},cold3:{n:'冷掉 3 個月',st:'designer',b:'b-cold3',m:'crm'},cold6:{n:'冷掉半年',st:'designer',b:'b-cold6',m:'crm'}};
+const D={
+ 1:{n:'林小設',co:'範例室內設計',g:'A',tags:['喜歡布簾','台北東區'],next:'11/07（今天）',nw:'打電話問「範例宅」報價看過了沒',last:'10/21（17 天前）',yr:'2 案',open:'1 筆',ref:'王範例（老業主）',how:'老業主介紹｜2026-05-12',stage:3,
+    log:[['10/30','報價','「範例宅」報價單 v2 寄出',1],['10/21','來店','帶業主來店看布，選了 3 款，下週要報價'],['10/15','推東西','LINE 傳「新款調光簾型錄」→ 回：有案子會用'],['09/28','電話','關心近況；說 10 月有兩個案子要開工'],['08/02','成交','「範例公寓」成交',1]],
+    inq:[['範例宅','等回覆','v2｜10/30 寄出','b-quote'],['範例公寓','已成交','08/02','b-ok'],['範例套房','沒談成','太貴｜業主預算砍半','b-cold6']],prj:[['範例公寓','已完工'],['範例辦公室','進行中']]},
+ 2:{n:'陳設計',co:'青木範例設計',g:'B',tags:['商空','預算型'],next:'11/08（明天）',nw:'問「陳範例宅」報價要不要調',last:'11/01（6 天前）',yr:'1 案',open:'2 筆',ref:'—',how:'展覽認識｜2026-03-20',stage:3,
+    log:[['11/01','報價','「陳範例宅」報價單 v1 寄出',1],['10/28','拜訪','到他們公司送樣本冊'],['10/02','LINE','問有沒有防焰布']],
+    inq:[['陳範例宅','等回覆','v1｜11/01 寄出','b-quote'],['陳範例辦公室','洽談中','9 天沒更新','b-inq']],prj:[['青木範例店面','已完工']]},
+ 3:{n:'王空間',co:'範例空間工作室',g:'B',tags:['住宅'],next:'—',nw:'',last:'08/02（3 個月前）',yr:'0 案',open:'0 筆',ref:'林小設',how:'設計師介紹｜2025-11-02',stage:2,
+    log:[['08/02','電話','說最近案子少'],['06/11','來店','看了壁紙樣本']],inq:[['王範例宅','沒談成','改用別家','b-cold6']],prj:[]},
+ 4:{n:'黃室內',co:'範例居家',g:'C',tags:['中部'],next:'—',nw:'',last:'05/06（半年前）',yr:'0 案',open:'0 筆',ref:'—',how:'網路找來｜2025-09-14',stage:1,
+    log:[['05/06','LINE','問窗簾價格']],inq:[],prj:[]},
+ 5:{n:'吳設計',co:'範例設計事務所',g:'A',tags:['高端住宅','喜歡進口布'],next:'11/07（今天）',nw:'他說 11 月初有新案，問進度',last:'10/18（20 天前）',yr:'4 案',open:'0 筆',ref:'—',how:'BNI｜2024-04-01',stage:4,
+    log:[['10/18','電話','說 11 月初有新案要報價'],['09/30','成交','「吳範例別墅」成交',1],['09/12','來店','帶業主選布']],inq:[['吳範例別墅','已成交','09/30','b-ok']],prj:[['吳範例別墅','進行中']]},
+ 6:{n:'張美學',co:'範例美學設計',g:'B',tags:['北部'],next:'11/09',nw:'跟催「張範例宅」報價',last:'10/31（7 天前）',yr:'1 案',open:'1 筆',ref:'吳設計',how:'設計師介紹｜2026-01-15',stage:3,
+    log:[['10/31','報價','「張範例宅」報價單 v2 寄出',1],['10/25','來店','改了布款，要重報']],inq:[['張範例宅','等回覆','v2｜10/31 寄出','b-quote']],prj:[]}
+};
+const TODO=[
+ {id:1,d:1,t:'call',why:'你 10/21 記的：打電話問「範例宅」報價看過了沒'},
+ {id:2,d:5,t:'call',why:'他說 11 月初有新案，今天該問了'},
+ {id:3,d:2,t:'quote',why:'「陳範例宅」報價 11/01 寄出，6 天沒回'},
+ {id:4,d:6,t:'quote',why:'「張範例宅」報價 v2 10/31 寄出，7 天沒回'},
+ {id:5,d:2,t:'inq',why:'「陳範例辦公室」洽談 9 天沒更新'},
+ {id:6,d:3,t:'cold3',why:'上次往來 08/02，3 個月沒聯絡'},
+ {id:7,d:4,t:'cold6',why:'上次往來 05/06，半年沒聯絡'}
+];
+const JOUR=['認識','第一次洽談','第一次報價','第一次成交','常合作'];
+const S={v:'A',scr:'home',dev:(innerWidth<760?'phone':'desk'),role:'boss',sel:1,f:'all',ctype:'all',drawer:null,lt:'all',ct:'log',modal:null,way:'電話',toast:'',done:{},open:{crm:1},sheet:false,mega:null,rf:'all'};
+let pickReply=null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const todoFor=st=>TODO.filter(x=>!S.done[x.id]&&(st==='all'||TT[x.t].st===st));
+const cnt=st=>todoFor(st).length;
+const modCnt=k=>TODO.filter(x=>!S.done[x.id]&&TT[x.t].m===k).length;
+const badge=t=>`<span class="badge ${TT[t].b}">${TT[t].n}</span>`;
+const myMods=()=>MODS.filter(m=>!ROLE[S.role].mods||ROLE[S.role].mods.includes(m.k));
+const items=m=>m.items.filter(i=>!(i[2]==='boss'&&S.role!=='boss'));
+const today='11/07（五）';
+
+/* ---------- 左邊兩層選單 ---------- */
+function sideNav(){
+  const cur=S.scr;
+  const mk=m=>{const op=!!S.open[m.k];const c=modCnt(m.k);const it=items(m);
+    return `<button class="mod ${it.length?'':'off'}" data-act="mod" data-k="${m.k}" aria-expanded="${op}"><span class="no">${m.no}</span>${m.n}${m.tag?` <span class="tag">（${m.tag}）</span>`:''}${c&&!op?`<span class="n" style="margin-left:auto">${c}</span>`:''}${it.length?`<span class="car" ${c&&!op?'style="margin-left:6px"':''}>${op?'▾':'▸'}</span>`:''}</button>`+
+      (op&&it.length?`<div class="subs">${it.map(i=>`<button data-act="nav" data-to="${i[0]}" ${i[0]===cur?'aria-current="page"':''}>${i[1]}${i[1]==='報價單'&&modCnt('sales')?`<span class="n">${modCnt('sales')}</span>`:''}</button>`).join('')}</div>`:'')};
+  const ms=myMods();
+  return `<button class="today" data-act="nav" data-to="home" ${cur==='home'?'aria-current="page"':''}>今天要做<span class="n">${cnt('all')}</span></button>
+   <div class="grp">工作</div>${ms.filter(m=>!m.ground).map(mk).join('')}
+   <div class="grp">地基（少用）</div>${ms.filter(m=>m.ground).map(mk).join('')}`;
+}
+function sheet(){
+  return `<div class="sheet"><h3 style="font-size:16px">全部模組</h3><div class="mods">${myMods().map(m=>`<button data-act="${m.k==='crm'?'nav':'x'}" data-to="card"><span class="no">${m.no}</span><span class="${m.items.length?'':'off'}">${m.n}</span>${m.tag?`<span class="small muted">${m.tag}</span>`:''}</button>`).join('')}</div><div class="small muted">手機上就是九宮格（Odoo 的首頁也長這樣）。樣張只做「客戶關係」。</div></div>`;
+}
+function shell(inner){
+  const ph=S.dev==='phone';
+  const cur=S.scr;
+  const tabs=`<div class="tabbar">
+    <button data-act="nav" data-to="home" ${cur==='home'&&!S.sheet?'aria-current="page"':''}><span class="i">☰</span>今天</button>
+    <button data-act="nav" data-to="card" ${cur==='card'&&!S.sheet?'aria-current="page"':''}><span class="i">◎</span>設計師</button>
+    <button class="plus" data-act="log" aria-label="記一筆往來"><span class="i">＋</span>記一筆</button>
+    <button data-act="x"><span class="i">◇</span>洽談</button>
+    <button data-act="sheet" ${S.sheet?'aria-current="page"':''}><span class="i">▦</span>更多</button></div>`;
+  return `<div class="app"><div class="top"><span class="logo">誠樂 ERP</span><span class="q">搜尋：設計師、電話、案名…</span><span class="me">${ROLE[S.role].me}</span></div>
+    <div class="body"><nav class="side">${sideNav()}</nav><div class="main" id="main">${inner}</div></div>${ph?tabs:''}</div>
+    ${ph&&S.sheet?sheet():''}${S.v==='C'&&S.drawer&&S.scr==='home'?drawer():''}${S.modal?modal():''}${S.toast?`<div class="toast">${esc(S.toast)}</div>`:''}`;
+}
+function shellD(inner){
+  const ms=myMods().filter(m=>m.items.length);
+  const tabs=`<nav class="d-tabs"><button data-act="nav" data-to="home" ${S.scr==='home'&&!S.mega?'aria-current="page"':''}>⌂ 首頁</button>${ms.map(m=>`<button data-act="mega" data-k="${m.k}" ${(S.mega===m.k||(!S.mega&&S.scr==='card'&&m.k==='crm'))?'aria-current="page"':''}>${m.n}<span class="car">▾</span></button>`).join('')}</nav>`;
+  let mega='';
+  if(S.mega){const m=MODS.find(x=>x.k===S.mega);mega=`<div class="mega"><div class="col"><h4>${m.no}　${m.n}</h4>${items(m).map(i=>`<button data-act="nav" data-to="${i[0]}">${i[1]}</button>`).join('')}</div><div class="col"><h4>常用動作</h4><button data-act="${m.k==='crm'?'log':'x'}">＋ ${m.k==='crm'?'記一筆往來':'新增'}</button><button data-act="x">看報表</button></div><div class="col" style="margin-left:auto"><button class="btn s" data-act="mclose2">關掉 ✕</button></div></div>`}
+  return `<div class="app d"><div class="top"><span class="logo">誠樂 ERP</span><span class="q">搜尋：設計師、電話、案名…</span><button class="new" data-act="log">＋ 新增</button><span class="me">${ROLE[S.role].me}</span></div>
+    ${tabs}<div class="main" id="main">${inner}</div></div>${mega}${S.modal?modal():''}${S.toast?`<div class="toast">${esc(S.toast)}</div>`:''}`;
+}
+function head(title,sub,btn=true){return `<div class="ph"><div><div class="d">${sub}</div><h2>${title}</h2></div>${btn?'<button class="btn p" data-act="log">＋ 記一筆往來</button>':''}</div>`}
+
+/* ---------- shared ---------- */
+function timeline(d,n){
+  const L=d.log.filter(x=>S.lt==='all'||(S.lt==='me'?!x[3]:x[3])).slice(0,n||99);
+  const tb=[['all','全部'],['me','人記的'],['sys','系統記的']].map(t=>`<button data-act="lt" data-k="${t[0]}" aria-pressed="${S.lt===t[0]}">${t[1]}</button>`).join('');
+  return `${n?'':`<div class="mini-tabs">${tb}</div>`}<div class="tl">${L.map(x=>`<div class="it ${x[3]?'sys':''}"><span class="d">${x[0]}</span><span class="k">${x[1]}</span><span class="x">${esc(x[2])}${x[3]?'（系統自己記）':''}</span></div>`).join('')||'<div class="empty">沒有</div>'}</div>`;
+}
+function nextBox(d){
+  return d.nw?`<div class="next"><div>⚠ <b>下次要做：</b>${esc(d.next)}　${esc(d.nw)}</div><button class="btn s" data-act="log">記一筆</button></div>`
+             :`<div class="next" style="background:var(--sunk)"><div class="muted">還沒排下次聯絡。上次聯絡 ${esc(d.last)}</div><button class="btn s" data-act="log">記一筆</button></div>`;
+}
+function about(d){
+  return `<dl class="kv"><dt>所屬公司</dt><dd>${esc(d.co)}</dd><dt>電話</dt><dd>0900-000-000</dd><dt>LINE</dt><dd>範例ID</dd><dt>誰介紹的</dt><dd>${esc(d.ref)}</dd><dt>怎麼認識</dt><dd>${esc(d.how)}</dd><dt>標籤</dt><dd>${d.tags.map(esc).join('、')}</dd><dt>負責業務</dt><dd>士誠</dd></dl>
+  <details style="margin-top:10px"><summary>收錢用的（發票抬頭、統編、付款條件）</summary><dl class="kv" style="margin-top:8px"><dt>發票抬頭</dt><dd>${esc(d.co)}有限公司</dd><dt>統編</dt><dd>00000000</dd><dt>付款條件</dt><dd>訂金一半＋尾款</dd></dl></details>`;
+}
+const inqList=d=>d.inq.length?d.inq.map(x=>`<div class="li"><span>${esc(x[0])}<br><span class="small muted">${esc(x[2])}</span></span><span class="badge ${x[3]}">${x[1]}</span></div>`).join(''):'<div class="empty">沒有</div>';
+const prjList=d=>d.prj.length?d.prj.map(x=>`<div class="li"><span>${esc(x[0])}</span><span class="badge ${x[1]==='進行中'?'b-call':'b-ok'}">${x[1]}</span></div>`).join(''):'<div class="empty">沒有</div>';
+function nameLine(d,big){
+  return `<div style="display:flex;gap:12px;align-items:center"><div class="av ${big?'lg':''}">${esc(d.n[0])}</div><div><div style="font-weight:700;font-size:${big?22:16}px;color:var(--heading)">${esc(d.n)} <span class="badge b-grade">${d.g} 級</span></div><div class="small muted">${esc(d.co)}｜0900-000-000</div></div></div>`;
+}
+const backBtn='<button class="btn s" data-act="nav" data-to="home">‹ 回今天</button>';
+
+/* ---------- A ---------- */
+function chev(){
+  return `<div class="chev"><button data-act="f" data-k="all" aria-pressed="${S.f==='all'}"><span class="nm">今天全部</span><span class="c"><span class="r">${cnt('all')}</span> 件</span></button>${ST.map(s=>{const r=cnt(s.k);return `<button data-act="f" data-k="${s.k}" aria-pressed="${S.f===s.k}"><span class="nm">${s.n}</span><span class="c">${s.c}${r?` · <span class="r">${r} 件要做</span>`:''}</span></button>`}).join('')}</div>`;
+}
+function homeA(){
+  const L=todoFor(S.f),d=D[S.sel];
+  const rows=L.map(x=>{const p=D[x.d];return `<button class="trow" data-act="${S.dev==='phone'?'open':'pick'}" data-d="${x.d}" aria-selected="${x.d===S.sel}">${badge(x.t)}<span><span class="who">${esc(p.n)}</span> <span class="small muted">${esc(p.co)}</span><br><span class="why">${esc(x.why)}</span></span><span class="small muted">›</span></button>`}).join('')||'<div class="empty">這一站今天沒有要做的</div>';
+  return head(`今天要做 ${cnt('all')} 件`,today)+chev()+`<div class="a-cols">
+   <section class="panel"><h3>今天要做的 <small>點一個，右邊就看到他</small></h3>${rows}</section>
+   <section class="panel a-prev"><h3>${esc(d.n)} <button class="btn s" data-act="open" data-d="${S.sel}">開資料卡 ›</button></h3>
+     ${nameLine(d)}<div style="margin:12px 0">${nextBox(d)}</div><div class="small muted" style="margin-bottom:4px">最近往來</div>${timeline(d,3)}</section>
+   <aside class="panel a-week"><h3>這星期</h3>
+     <div class="li"><span>新洽談</span><b>3 筆</b></div><div class="li"><span>寄出報價</span><b>5 張</b></div><div class="li"><span>成交</span><b>2 案</b></div><div class="li"><span>記了往來</span><b>11 次</b></div>
+     <h3 style="margin-top:16px">快冷掉的設計師</h3><div class="li"><span>王空間</span><span class="badge b-cold3">3 個月</span></div><div class="li"><span>黃室內</span><span class="badge b-cold6">半年</span></div></aside></div>`;
+}
+function cardA(d){
+  return `<div class="ph"><div>${backBtn}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-act="log">＋ 記一筆往來</button><button class="btn" data-act="x">＋ 開洽談</button></div></div>
+  <div class="hl"><div><div class="l">負責業務</div><div class="v">士誠</div></div><div><div class="l">下次聯絡</div><div class="v">${esc(d.next)}</div></div><div><div class="l">上次聯絡</div><div class="v">${esc(d.last)}</div></div><div><div class="l">今年成交</div><div class="v">${d.yr}</div></div><div><div class="l">洽談中</div><div class="v">${d.open}</div></div></div>
+  <div class="a-card"><section class="panel">${nameLine(d,true)}<div style="margin-top:14px">${about(d)}</div></section>
+   <section class="panel" style="display:grid;gap:12px">${nextBox(d)}<h3 style="margin:0">往來紀錄</h3>${timeline(d)}</section>
+   <aside style="display:grid;gap:16px"><section class="panel"><h3>洽談 <small>${d.inq.length} 筆</small></h3>${inqList(d)}</section><section class="panel"><h3>案子 <small>${d.prj.length} 件</small></h3>${prjList(d)}</section></aside></div>`;
+}
+/* ---------- B ---------- */
+function homeB(){
+  const nodes=ST.map((s,i)=>{const r=cnt(s.k);return `<button class="node" data-act="f" data-k="${s.k}" aria-pressed="${S.f===s.k}"><span class="step">第 ${i+1} 站</span><span class="nm">${s.n}</span><span class="c">${s.c}</span>${r?`<span class="r">${r}</span>`:''}</button>`});
+  const L=todoFor(S.f);
+  const cards=L.map(x=>{const p=D[x.d];return `<div class="tcard"><div class="hd"><div class="av">${esc(p.n[0])}</div><div style="min-width:0"><button class="who" data-act="open" data-d="${x.d}">${esc(p.n)}</button> <span class="small muted">${esc(p.co)}</span><div>${badge(x.t)}</div></div></div><div>${esc(x.why)}</div><div class="acts"><button class="btn p s" data-act="log" data-d="${x.d}">記一筆往來</button><button class="btn s" data-act="call">打電話</button><button class="btn s" data-act="done" data-id="${x.id}">今天先不用</button></div></div>`}).join('')||'<div class="empty">這一站今天沒有要做的</div>';
+  return head(`今天要做 ${cnt('all')} 件`,today)+`<div class="map">${nodes.join('<span class="arr">→</span>')}</div><div class="b-legend">紅色數字＝這一站今天要處理幾件。點一站，下面只列那一站；${S.f!=='all'?'<button class="btn s" data-act="f" data-k="all">看全部</button>':'現在列的是全部。'}</div><div class="b-grid">${cards}</div>`;
+}
+function cardB(d){
+  return `<div class="b-card"><div>${backBtn}</div>
+   <section class="panel" style="display:grid;gap:14px">${nameLine(d,true)}<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-act="log">＋ 記一筆往來</button><button class="btn" data-act="call">打電話</button><button class="btn" data-act="x">開 LINE</button><button class="btn" data-act="x">＋ 開洽談</button></div></section>
+   ${nextBox(d)}
+   <div class="b-stats"><div><div class="l">上次聯絡</div><div class="v">${esc(d.last)}</div></div><div><div class="l">下次聯絡</div><div class="v">${esc(d.next)}</div></div><div><div class="l">今年成交</div><div class="v">${d.yr}</div></div><div><div class="l">洽談中</div><div class="v">${d.open}</div></div></div>
+   <section class="panel"><h3>往來紀錄</h3>${timeline(d)}</section><section class="panel"><h3>洽談 <small>${d.inq.length} 筆</small></h3>${inqList(d)}</section>
+   <section class="panel"><h3>案子 <small>${d.prj.length} 件</small></h3>${prjList(d)}</section><section class="panel"><h3>他是誰</h3>${about(d)}</section></div>`;
+}
+/* ---------- C ---------- */
+function homeC(){
+  const typ=[['all','全部'],['call','該聯絡'],['quote','報價沒回'],['inq','洽談沒動'],['cold','冷掉']];
+  const m=(x,t)=>t==='all'||(t==='cold'?x.t.startsWith('cold'):x.t===t);
+  const L=todoFor(S.f).filter(x=>m(x,S.ctype));
+  const path=`<div class="path"><button data-act="f" data-k="all" aria-pressed="${S.f==='all'}"><b>今天全部 ${cnt('all')}</b></button>${ST.map(s=>{const r=cnt(s.k);return `<span class="sp">›</span><button data-act="f" data-k="${s.k}" aria-pressed="${S.f===s.k}">${s.n} ${r?`<b style="color:var(--red)">${r}</b>`:'<span>0</span>'}</button>`}).join('')}</div>`;
+  const chips=typ.map(t=>`<button data-act="ct" data-k="${t[0]}" aria-pressed="${S.ctype===t[0]}">${t[1]} ${todoFor(S.f).filter(x=>m(x,t[0])).length}</button>`).join('');
+  const rows=L.map(x=>{const p=D[x.d];return `<tr class="row" data-act="drawer" data-d="${x.d}" aria-selected="${S.drawer===x.d}"><td><b>${esc(p.n)}</b><div class="small muted">${esc(p.co)}</div></td><td>${badge(x.t)}</td><td class="hide-p" style="color:var(--muted)">${esc(x.why)}</td><td class="hide-p">${esc(p.last.split('（')[0])}</td><td class="hide-p">士誠</td><td class="hide-p"><button class="btn s" data-act="log" data-d="${x.d}">記一筆</button></td></tr>`}).join('');
+  return head(`今天要做 ${cnt('all')} 件`,today)+path+`<div class="chips">${chips}</div><table class="ct"><thead><tr><th>設計師</th><th>要做什麼</th><th class="hide-p">原因</th><th class="hide-p">上次聯絡</th><th class="hide-p">負責</th><th class="hide-p"></th></tr></thead><tbody>${rows||'<tr><td colspan="6" class="empty">沒有</td></tr>'}</tbody></table>`;
+}
+function drawer(){
+  const d=D[S.drawer];
+  return `<aside class="drawer"><div class="x"><b style="color:var(--heading)">設計師</b><span style="display:flex;gap:6px"><button class="btn s" data-act="open" data-d="${S.drawer}">開完整頁 ›</button><button class="btn s" data-act="cd" aria-label="關掉">✕</button></span></div>
+   ${nameLine(d)}${nextBox(d)}<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p s" data-act="log">記一筆往來</button><button class="btn s" data-act="call">打電話</button></div>
+   <div><div class="small muted" style="margin-bottom:4px">往來紀錄</div>${timeline(d)}</div><div><div class="small muted">洽談</div>${inqList(d)}</div></aside>`;
+}
+function tabBody(d){return {log:()=>nextBox(d)+'<div style="height:12px"></div>'+timeline(d),inq:()=>inqList(d),prj:()=>prjList(d),about:()=>about(d)}[S.ct]()}
+const tabBar=d=>`<div class="tabs">${[['log','往來紀錄'],['inq',`洽談 ${d.inq.length}`],['prj',`案子 ${d.prj.length}`],['about','他是誰']].map(t=>`<button data-act="ctab" data-k="${t[0]}" aria-pressed="${S.ct===t[0]}">${t[1]}</button>`).join('')}</div>`;
+function cardC(d){
+  return `<div class="ph"><div>${backBtn}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-act="log">＋ 記一筆往來</button><button class="btn" data-act="x">＋ 開洽談</button></div></div>
+   <section class="panel" style="margin-bottom:14px">${nameLine(d,true)}<div class="jpath" style="margin:14px 0 6px">${JOUR.map((j,i)=>`<span class="${i<d.stage?'done':i===d.stage?'on':''}">${j}</span>`).join('')}</div><div class="small muted">合作進度（系統自己從洽談、報價、成交算出來，不用填）</div></section>
+   ${tabBar(d)}<section class="panel">${tabBody(d)}</section>`;
+}
+/* ---------- D 甲骨文 ---------- */
+function homeD(){
+  const rem=[['all',`今天要做`,cnt('all')],['call','設計師該聯絡',TODO.filter(x=>!S.done[x.id]&&x.t==='call').length],['quote','報價寄出沒回',TODO.filter(x=>!S.done[x.id]&&x.t==='quote').length],['inq','洽談 7 天沒動',TODO.filter(x=>!S.done[x.id]&&x.t==='inq').length],['cold','快冷掉的設計師',TODO.filter(x=>!S.done[x.id]&&x.t.startsWith('cold')).length]];
+  const m=(x,t)=>t==='all'||(t==='cold'?x.t.startsWith('cold'):x.t===t);
+  const L=TODO.filter(x=>!S.done[x.id]&&m(x,S.rf));
+  const rows=L.map(x=>{const p=D[x.d];return `<button class="trow" data-act="open" data-d="${x.d}">${badge(x.t)}<span><span class="who">${esc(p.n)}</span> <span class="small muted">${esc(p.co)}</span><br><span class="why">${esc(x.why)}</span></span><span class="small muted">›</span></button>`}).join('')||'<div class="empty">沒有</div>';
+  const boss=S.role==='boss';
+  return `<div class="d-band"><div><h2>早安，${boss?'士誠':'會計'}</h2><div class="sub">${today}｜${boss?'老闆中心':'會計中心'}</div></div><div class="qa"><button data-act="log">＋ 記一筆往來</button><button data-act="x">＋ 新設計師</button><button data-act="x">＋ 開洽談</button><button data-act="x">＋ 新報價</button></div></div>
+  <div class="portlets">
+   <section class="plet"><h3>提醒 <small>點一行，右邊只列那一種</small></h3><div class="bd rem">${rem.map(r=>`<button data-act="rf" data-k="${r[0]}" aria-pressed="${S.rf===r[0]}"><span>${r[1]}</span><span class="num">${r[2]}</span></button>`).join('')}</div></section>
+   <section class="plet span2"><h3>今天要做 <small>${L.length} 件</small></h3><div class="bd">${rows}</div></section>
+   <section class="plet"><h3>這星期的數字</h3><div class="bd"><div class="kpis"><div><div class="v">3</div><div class="l">新洽談</div></div><div><div class="v">5</div><div class="l">寄出報價</div></div><div><div class="v">2</div><div class="l">成交</div></div><div><div class="v">11</div><div class="l">記了往來</div></div></div></div></section>
+   <section class="plet"><h3>流程概況</h3><div class="bd"><div class="mflow">${ST.map((s,i)=>`${i?'<span class="a">›</span>':''}<span class="s">${s.n} ${cnt(s.k)?`<b>${cnt(s.k)}</b>`:''}</span>`).join('')}</div><div class="small muted" style="margin-top:8px">紅字＝那一站今天要做幾件</div></div></section>
+   <section class="plet"><h3>捷徑</h3><div class="bd links"><button data-act="nav" data-to="card">設計師清單</button><button data-act="x">洽談看板</button><button data-act="x">報價單清單</button>${boss?'<button data-act="x">老闆的表</button>':''}</div></section>
+  </div>`;
+}
+function cardD(d){
+  return `<div class="crumb">客戶關係 › 設計師／客戶 › ${esc(d.n)}</div>
+  <section class="d-head"><div class="row1">${nameLine(d,true)}<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" data-act="log">＋ 記一筆往來</button><button class="btn" data-act="x">＋ 開洽談</button><button class="btn" data-act="x">更多動作 ▾</button></div></div>
+   <div class="d-fields"><div><div class="l">負責業務</div><div class="v">士誠</div></div><div><div class="l">下次聯絡</div><div class="v">${esc(d.next)}</div></div><div><div class="l">上次聯絡</div><div class="v">${esc(d.last)}</div></div><div><div class="l">今年成交</div><div class="v">${d.yr}</div></div><div><div class="l">所屬公司</div><div class="v">${esc(d.co)}</div></div><div><div class="l">誰介紹的</div><div class="v">${esc(d.ref)}</div></div><div><div class="l">洽談中</div><div class="v">${d.open}</div></div><div><div class="l">標籤</div><div class="v">${d.tags.map(esc).join('、')}</div></div></div></section>
+  ${tabBar(d)}<section class="panel">${tabBody(d)}</section>`;
+}
+/* ---------- modal ---------- */
+function modal(){
+  const d=D[S.modal];
+  return `<div class="scrim" data-act="mclose"><div class="modal" role="dialog" aria-label="記一筆往來" data-stop="1">
+   <h3>記一筆往來｜${esc(d.n)}</h3>
+   <div><div class="small muted" style="margin-bottom:6px">方式（點一個）</div><div class="ways">${['電話','來店','LINE','拜訪','推東西'].map(w=>`<button data-act="way" data-k="${w}" aria-pressed="${S.way===w}">${w}</button>`).join('')}</div></div>
+   <label>聊了什麼（一句話）<input id="mTxt" placeholder="例：業主覺得貴，要再想想"></label>
+   <label>下次什麼時候找他（可以不填）<input id="mNext" placeholder="例：11/12 再問一次"></label>
+   <div class="small muted">日期自動帶今天（要改可以改），記的人自動帶登入的人。填了「下次」，那天就會出現在每日總表。</div>
+   <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" data-act="mclose">取消</button><button class="btn p" data-act="msave">存</button></div></div></div>`;
+}
+/* ---------- render ---------- */
+function render(){
+  $('#pick').innerHTML=VERS.map(v=>`<button data-act="v" data-k="${v.k}" aria-pressed="${S.v===v.k}"><span class="k">長相 ${v.k}</span><span class="t">${v.t}</span><span class="s">${v.s}</span></button>`).join('');
+  $('#segScreen').innerHTML=[['home','每日總表（首頁）'],['card','設計師資料卡']].map(x=>`<button data-act="scr" data-k="${x[0]}" aria-pressed="${S.scr===x[0]}">${x[1]}</button>`).join('');
+  $('#segDev').innerHTML=[['desk','電腦'],['phone','手機']].map(x=>`<button data-act="dev" data-k="${x[0]}" aria-pressed="${S.dev===x[0]}">${x[1]}</button>`).join('');
+  $('#segRole').innerHTML='<span class="lb">看成</span>'+Object.entries(ROLE).map(([k,r])=>`<button data-act="role" data-k="${k}" aria-pressed="${S.role===k}">${r.n}</button>`).join('');
+  $('#hint').textContent=S.dev==='desk'&&innerWidth<1200?'電腦版比你現在的畫面寬，可以左右滑著看；或切到「手機」。':(S.v==='D'?'試試看：點上面一排的「客戶關係」、點提醒的一行、按「＋ 新增」。':'試試看：點左邊的大模組展開細項、切「看成：會計」、按「記一筆往來」。');
+  const d=D[S.sel];
+  const fn={A:[homeA,()=>cardA(d)],B:[homeB,()=>cardB(d)],C:[homeC,()=>cardC(d)],D:[homeD,()=>cardD(d)]}[S.v][S.scr==='home'?0:1];
+  const f=$('#frame');f.className='frame '+S.dev;
+  const keep=f.querySelector('#main')?.scrollTop||0;
+  f.innerHTML=(S.v==='D'?shellD:shell)(fn());
+  if(S._keep){const m=f.querySelector('#main');if(m)m.scrollTop=keep}
+  S._keep=false;
+}
+function toast(t){S.toast=t;S._keep=true;render();clearTimeout(toast.h);toast.h=setTimeout(()=>{S.toast='';S._keep=true;render()},1800)}
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]');if(!el)return;
+  if(el.dataset.act==='mclose'&&e.target.closest('[data-stop]'))return;
+  const a=el.dataset.act,k=el.dataset.k;
+  if(a==='pick'){S.sel=+el.dataset.d;S._keep=true;render();return}
+  S._keep=['f','lt','way','ct','done','drawer','cd','mod','rf','ctab'].includes(a);
+  switch(a){
+    case 'v':S.v=k;S.f='all';S.ctype='all';S.drawer=null;S.mega=null;S.sheet=false;S.rf='all';break;
+    case 'scr':S.scr=k;S.drawer=null;S.mega=null;S.sheet=false;break;
+    case 'dev':S.dev=k;S.drawer=null;S.mega=null;S.sheet=false;break;
+    case 'role':S.role=k;S.mega=null;break;
+    case 'nav':if(el.dataset.to==='x'){toast('樣張只做「今天」和「設計師資料卡」');return}S.scr=el.dataset.to;S.drawer=null;S.mega=null;S.sheet=false;if(S.scr==='card'){S.lt='all';S.ct='log'}break;
+    case 'mod':{const m=MODS.find(x=>x.k===k);if(!m.items.length){toast('員工薪資暫時用 104');return}S.open[k]=!S.open[k];break}
+    case 'mega':S.mega=S.mega===k?null:k;break;
+    case 'mclose2':S.mega=null;break;
+    case 'sheet':S.sheet=!S.sheet;break;
+    case 'f':S.f=k;S.ctype='all';break;
+    case 'ct':S.ctype=k;break;
+    case 'rf':S.rf=k;break;
+    case 'lt':S.lt=k;break;
+    case 'ctab':S.ct=k;break;
+    case 'open':S.sel=+el.dataset.d;S.scr='card';S.drawer=null;S.lt='all';S.ct='log';S.mega=null;break;
+    case 'drawer':if(e.target.closest('button'))return;S.drawer=+el.dataset.d;S.sel=S.drawer;break;
+    case 'cd':S.drawer=null;break;
+    case 'log':if(el.dataset.d)S.sel=+el.dataset.d;S.modal=S.sel;S.way='電話';S.mega=null;S._keep=true;break;
+    case 'way':{S.way=k;const t=$('#mTxt')?.value,n=$('#mNext')?.value;render();if($('#mTxt')){$('#mTxt').value=t||'';$('#mNext').value=n||''}return}
+    case 'mclose':S.modal=null;S._keep=true;break;
+    case 'msave':{const t=($('#mTxt').value||'').trim()||'（沒寫內容）';const n=($('#mNext').value||'').trim();const dd=D[S.modal];dd.log.unshift(['11/07',S.way,t]);if(n){dd.next=n;dd.nw='（你剛剛記的）'}dd.last='11/07（今天）';TODO.filter(x=>x.d===S.modal&&(x.t==='call'||x.t.startsWith('cold'))).forEach(x=>S.done[x.id]=1);S.modal=null;toast('記好了（樣張，不會存進 ERP）');return}
+    case 'done':S.done[el.dataset.id]=1;toast('先從今天拿掉（樣張）');return;
+    case 'call':toast('手機上會直接撥號（樣張不會真的撥）');return;
+    case 'x':toast('樣張只做「今天」和「設計師資料卡」');return;
+  }
+  render();
+});
+const RO=['A 三欄工作台','B 流程圖首頁','C 清單＋抽屜','D 甲骨文','老闆看 D、其他人看 A','混著用（寫在下面）','都不要，再做別的'];
+function rr(){$('#replyOpts').innerHTML=RO.map((o,i)=>`<button data-r="${i}" aria-pressed="${pickReply===i}">${o}${i===0?'（建議）':''}</button>`).join('')}
+$('#replyOpts').addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(!b)return;pickReply=+b.dataset.r;rr()});
+$('#mk').addEventListener('click',()=>{
+  $('#out').textContent=`CRM 四種長相回覆（11/7，樣張第 2 版）\n1. 選：${pickReply==null?'（沒選）':RO[pickReply]}\n2. 左邊兩層選單（10 個大模組）：照這樣／要改（寫在 3）\n3. 要改的地方：${$('#replyNote').value.trim()||'（沒寫）'}`;
+  $('#outWrap').hidden=false;$('#cp').textContent='一鍵複製';
+});
+$('#cp').addEventListener('click',()=>{const t=$('#out').textContent;
+  try{navigator.clipboard.writeText(t).then(()=>$('#cp').textContent='已複製',()=>{$('#cp').textContent='請長按上面文字複製'})}catch(_){$('#cp').textContent='請長按上面文字複製'}});
+rr();render();
+addEventListener('resize',()=>{S._keep=true;render()});
+</script>
+
+</body></html>
